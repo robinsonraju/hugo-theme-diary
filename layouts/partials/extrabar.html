@@ -4,7 +4,7 @@
     <div class="gcse-search"></div>
     {{ end }}
     {{ if and (not (.Site.Params.disableToC) ) (.IsPage) }}
-    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+    <div class="toc animated-visibility" :class="{}">
         {{- partial "toc.html" . -}}
     </div>
     {{ end }}
@@ -31,7 +31,7 @@
                     {{.Paginator.PageNumber}}<br><div style="display: inline-block; transform: rotate(-28deg)">-</div><br>{{.Paginator.TotalPages}}
                 </span>
             </div>
-            
+
             {{ if .Paginator.HasPrev }}
             <a class="pagination-action" href="{{.Paginator.Prev.URL}}">
                 <i class="material-icons pagination-action-icon">

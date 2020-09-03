@@ -18,10 +18,10 @@
                 <div class="post-item-wrapper">
                     <div class="post-item post-item-no-gaps">
                         <div class="post-item-info-wrapper">
-                            <div class="post-item-title">
-                                {{.Title}}
+                            <div class="post-item-title-small">
+                              <span >{{ .Date.Format "01/02" }}</span> &nbsp;
+                              <span> {{.Title}} </span>
                             </div>
-                            {{ partial "post-item-meta.html" . }}
                         </div>
                     </div>
                 </div>

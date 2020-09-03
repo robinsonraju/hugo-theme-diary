@@ -32,10 +32,12 @@
                         </time>
                         {{ end }}
 
-                        {{ if .Params.categories }}
-                            <i class="material-icons" style="">folder</i>
-                                <a href="{{ "/categories/" | relLangURL }}{{ .Params.categories | urlize }}">{{ .Params.categories }}</a>
+                        {{ if gt .Params.categories 0 }}
+                            {{ range .Params.categories }}
+                                <i class="material-icons" style="">folder</i>
+                                <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
                                 &nbsp;
+                            {{ end }}
                         {{ end }}
 
                         {{ if gt .Params.tags 0 }}
@@ -45,22 +47,26 @@
                                 &nbsp;
                             {{ end }}
                         {{ end }}
-                        {{ if .Site.Params.enableReadingTime }}
-                            <i class="material-icons" style="">schedule</i>
-                            {{ $readTime := mul (div (countwords .Content) 220.0) 60 }}
+                        {{ if (ne .Title "About") }}
+                          {{ if .Site.Params.enableReadingTime }}
+                            {{ (countwords .Content)}} words
+                              <i class="material-icons" style="">schedule</i>
 
-                            {{ $minutes := math.Floor (div $readTime 60) }}
-                            {{ $seconds := mod $readTime 60 }}
+                              {{ $readTime := mul (div (countwords .Content) 220.0) 60 }}
 
-                            {{ if gt $minutes 0}}
-                            {{ $minutes }} {{ cond (eq $minutes 1) "minute" "min" }}
-                            {{ end }}
-                            {{ $seconds }} {{ cond (eq $seconds 1) "second" "s" }}.
+                              {{ $minutes := math.Floor (div $readTime 60) }}
+                              {{ $seconds := mod $readTime 60 }}
+
+                              {{ if gt $minutes 0}}
+                              {{ $minutes }} {{ cond (eq $minutes 1) "minute" "min" }}
+                              {{ end }}
+                              {{ $seconds }} {{ cond (eq $seconds 1) "second" "s" }}.
+                          {{ end }}
                         {{ end }}
                     </div>
                 </div>
             </div>
-            
+
             <div class="post-body-wrapper">
                 {{ if .Params.enableVue }}
                 <div class="post-body">
@@ -74,8 +80,8 @@
                     {{ end }}
                 </div>
             </div>
-            
-            
+
+
             <nav class="post-pagination">
 
                 {{if .Next}}
@@ -87,7 +93,7 @@
 			{{ i18n "next_link" }}<br>{{ i18n "no_newer_posts"}}
                 </a>
                 {{end}}
-                
+
                 {{if .Prev}}
                 <a class="older-posts" href="{{.Prev.Permalink}}">
 			{{ i18n "prev_link" }}<br>{{.Prev.Title}}
