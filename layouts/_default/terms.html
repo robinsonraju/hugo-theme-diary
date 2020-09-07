@@ -28,7 +28,9 @@
                 <ul>
                   {{ range first 5 .Pages }}
                     <li>
-                      <a class="terms-link" href="{{ .Permalink }}">{{ .Title }}</a>
+                      <a class="terms-link" href="{{ .Permalink }}">
+                        {{ .Date.Format "01/02/2006" }} &nbsp; {{.Title}}
+                      </a>
                     </li>
                   {{ end }}
                     <li>
