@@ -40,13 +40,6 @@
                             {{ end }}
                         {{ end }}
 
-                        {{ if gt .Params.tags 0 }}
-                            <i class="material-icons" style="">label</i>
-                            {{ range .Params.tags }}
-                                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-                                &nbsp;
-                            {{ end }}
-                        {{ end }}
                         {{ if (ne .Title "About") }}
                           {{ if .Site.Params.enableReadingTime }}
                             {{ (countwords .Content)}} words
@@ -79,6 +72,13 @@
 		    <p style="color:#777;">{{ i18n "last_mod_on" .Page.Lastmod }}</p>
                     {{ end }}
                 </div>
+                {{ if gt .Params.tags 0 }}
+
+                    {{ range .Params.tags }}
+                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">#{{ . }}</a>
+                        &nbsp;
+                    {{ end }}
+                {{ end }}
             </div>
 
 
